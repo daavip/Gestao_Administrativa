@@ -41,8 +41,8 @@ namespace Gestão_Administrativa.Repositories
             userById.Name = user.Name;
             userById.Email = user.Email;
 
-            await _dbContext.Users.AddAsync(userById);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.Users.Update(userById);
+            _dbContext.SaveChanges();
 
             return userById;
         }
@@ -56,8 +56,8 @@ namespace Gestão_Administrativa.Repositories
                 throw new Exception($"Usuario para o ID:{id} não foi encontrado no banco de dados");
             }
 
-            await _dbContext.Users.AddAsync(userById);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.Users.Remove(userById);
+            _dbContext.SaveChanges();
             return true;
         }
 

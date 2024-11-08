@@ -1,55 +1,99 @@
-﻿using Gestão_Administrativa.Models;
-using Gestão_Administrativa.Repositories.Interface;
-using Microsoft.AspNetCore.Http;
+﻿using Gestão_Administrativa.Data;
+using Gestão_Administrativa.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 
-namespace Gestão_Administrativa.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class ClientesController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+    private readonly SubscriptionManagementDBContext _context;
+
+    public ClientesController(SubscriptionManagementDBContext context)
     {
-        private readonly IUserRepo _userRepo;
-        public UserController(IUserRepo userRepo)
-        {
-            _userRepo = userRepo;
+        _context = context;
+    }
 
-        }
-        [HttpGet]
-        public async Task<ActionResult<List<UserModel>>> SearchAllUsers()
-        {
-            List<UserModel> users = await _userRepo.SearchAllUsers();
-            return Ok(users);
-        }
+    // GET: api/Clientes
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<UserModel>>> GetClientes()
+    {
+        return await _context.Users.ToListAsync();
+    }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserModel>> SearchId(int id)
-        {
-            UserModel user = await _userRepo.SearchId(id);
-            return Ok(user);
-        }
+    // GET: api/Clientes/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UserModel>> GetCliente(int id)
+    {
+        var cliente = await _context.Users.FindAsync(id);
 
-        [HttpPost]
-        public async Task<ActionResult<UserModel>> Register([FromBody] UserModel userModel)
+        if (cliente == null)
         {
-            UserModel user = await _userRepo.Add(userModel);
-            return Ok(user);
+            return NotFound();
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<UserModel>> Update([FromBody] UserModel userModel, int id)
+        return cliente;
+    }
+
+    // POST: api/Clientes
+    [HttpPost]
+    public async Task<ActionResult<UserModel>> PostCliente(UserModel cliente)
+    {
+        _context.Users.Add(cliente);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, cliente);
+    }
+
+    // PUT: api/Clientes/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutCliente(int id, UserModel cliente)
+    {
+        if (id != cliente.Id)
         {
-            userModel.Id = id;
-            UserModel user = await _userRepo.Update(userModel, id);
-            return Ok(user);
+            return BadRequest();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<UserModel>> Delete(int id)
+        _context.Entry(cliente).State = EntityState.Modified;
+
+        try
         {
-            bool deleted = await _userRepo.Delete(id);
-            return Ok(deleted);
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ClienteExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
         }
 
+        return NoContent();
+    }
+
+    // DELETE: api/Clientes/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCliente(int id)
+    {
+        var cliente = await _context.Users.FindAsync(id);
+        if (cliente == null)
+        {
+            return NotFound();
+        }
+
+        _context.Users.Remove(cliente);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    private bool ClienteExists(int id)
+    {
+        return _context.Users.Any(e => e.Id == id);
     }
 }

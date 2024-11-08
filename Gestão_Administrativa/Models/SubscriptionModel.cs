@@ -6,9 +6,13 @@ namespace Gestão_Administrativa.Models
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-        public bool IsActive { get; set; }
-        public StatusSubscription Status { get; set; }
+        public string? Description { get; set; }
+        public string? Type { get; set; }
+        public decimal Price { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        public ICollection<SubscriptionContractModel> SubscriptionContracts { get; set; }
+
+
     }
 }

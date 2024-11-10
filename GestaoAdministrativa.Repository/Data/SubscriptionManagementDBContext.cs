@@ -1,8 +1,8 @@
 ﻿using Gestão_Administrativa.Data.Map;
-using Gestão_Administrativa.Models;
+using Gestão_Administrativa.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gestão_Administrativa.Data
+namespace Gestão_Administrativa.Repository.Data
 {
     public class SubscriptionManagementDBContext : DbContext
     {
@@ -13,7 +13,6 @@ namespace Gestão_Administrativa.Data
         public DbSet<ContactModel> Contact { get; set; }
         public DbSet<AddressModel> Address { get; set; }
         public DbSet<ContractModel> Contract { get; set; }
-        public DbSet<StatusContactModel> StatusContact { get; set; }
         public DbSet<SubscriptionContractModel> SubscriptionContract { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

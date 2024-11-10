@@ -1,6 +1,4 @@
-﻿using Gestão_Administrativa.Enums;
-
-namespace Gestão_Administrativa.Models
+﻿namespace Gestão_Administrativa.Domain.Models
 {
     public class SubscriptionModel
     {

@@ -1,9 +1,9 @@
-﻿using Gestão_Administrativa.Data;
-using Gestão_Administrativa.Models;
-using Gestão_Administrativa.Repositories.Interface;
+﻿using Gestão_Administrativa.Domain.Interface;
+using Gestão_Administrativa.Domain.Models;
+using Gestão_Administrativa.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gestão_Administrativa.Repositories
+namespace Gestão_Administrativa.Repository.Services
 {
     public class UserRepo : IUserRepo
     {

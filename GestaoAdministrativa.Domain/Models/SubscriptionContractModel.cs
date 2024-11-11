@@ -3,7 +3,7 @@
     public class SubscriptionContractModel
     {
         public int Id { get; set; }
-        public int IdContract { get; set; }
+        public int ContractId { get; set; }
         public int SubscriptionId { get; set; }
 
 

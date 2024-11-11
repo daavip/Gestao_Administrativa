@@ -3,14 +3,14 @@
     public class ContractModel
     {
         public int Id { get; set; }
-        public int IdUser { get; set; }
-        public int IdAddress { get; set; }
+        public int CustomerId { get; set; }
+        public int AddressId { get; set; }
+        public int EquipmentId { get; set; }
         public int StatusCtId { get; set; }
         public DateTime CreatedAt { get; set; }
 
 
-        public UserModel User { get; set; }
+        public CustomerModel Customer { get; set; }
         public AddressModel Address { get; set; }
-        public StatusContactModel StatusContact { get; set; }
     }
 }

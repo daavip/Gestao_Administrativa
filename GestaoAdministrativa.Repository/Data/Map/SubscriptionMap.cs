@@ -1,4 +1,4 @@
-﻿using Gestão_Administrativa.Models;
+﻿using Gestão_Administrativa.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,7 +9,6 @@ namespace Gestão_Administrativa.Data.Map
         public void Configure(EntityTypeBuilder<SubscriptionModel> builder)
         {
             builder.HasKey(x=> x.Id);
-            builder.Property(x=> x.Name).IsRequired().HasMaxLength(255);
 
         }
     }

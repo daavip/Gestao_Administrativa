@@ -12,47 +12,47 @@ namespace Gestão_Administrativa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserModelsController : ControllerBase
+    public class CustomerModelsController : ControllerBase
     {
         private readonly SubscriptionManagementDBContext _context;
 
-        public UserModelsController(SubscriptionManagementDBContext context)
+        public CustomerModelsController(SubscriptionManagementDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/UserModels
+        // GET: api/CustomerModels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserModel>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<CustomerModel>>> GetCustomers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Customer.ToListAsync();
         }
 
-        // GET: api/UserModels/5
+        // GET: api/CustomerModels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserModel>> GetUserModel(int id)
+        public async Task<ActionResult<CustomerModel>> GetCustomerModel(int id)
         {
-            var userModel = await _context.Users.FindAsync(id);
+            var customerModel = await _context.Customer.FindAsync(id);
 
-            if (userModel == null)
+            if (customerModel == null)
             {
                 return NotFound();
             }
 
-            return userModel;
+            return customerModel;
         }
 
         // PUT: api/UserModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserModel(int id, UserModel userModel)
+        public async Task<IActionResult> PutUserModel(int id, CustomerModel customerModel)
         {
-            if (id != userModel.Id)
+            if (id != customerModel.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(userModel).State = EntityState.Modified;
+            _context.Entry(customerModel).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Gestão_Administrativa.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserModelExists(id))
+                if (!CustomerModelExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace Gestão_Administrativa.Controllers
             return NoContent();
         }
 
-        // POST: api/UserModels
+        // POST: api/CustomerModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserModel>> PostUserModel(UserModel userModel)
+        public async Task<ActionResult<CustomerModel>> PostUserModel(CustomerModel customerModel)
         {
-            _context.Users.Add(userModel);
+            _context.Customer.Add(customerModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserModel", new { id = userModel.Id }, userModel);
+            return CreatedAtAction("GetCustomerModel", new { id = customerModel.Id }, customerModel);
         }
 
-        // DELETE: api/UserModels/5
+        // DELETE: api/CustomerModels/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserModel(int id)
+        public async Task<IActionResult> DeleteCustomerModel(int id)
         {
-            var userModel = await _context.Users.FindAsync(id);
-            if (userModel == null)
+            var customerModel = await _context.Customer.FindAsync(id);
+            if (customerModel == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(userModel);
+            _context.Customer.Remove(customerModel);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserModelExists(int id)
+        private bool CustomerModelExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Customer.Any(e => e.Id == id);
         }
     }
 }

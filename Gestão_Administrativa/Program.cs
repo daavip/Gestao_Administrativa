@@ -1,8 +1,10 @@
 
 using Gestão_Administrativa.Data;
-using Gestão_Administrativa.Repositories;
-using Gestão_Administrativa.Repositories.Interface;
+using Gestão_Administrativa.Repository;
+using Gestão_Administrativa.Domain.Interface;
 using Microsoft.EntityFrameworkCore;
+using Gestão_Administrativa.Repository.Data;
+using Gestão_Administrativa.Repository.Services;
 
 namespace Gestão_Administrativa
 {

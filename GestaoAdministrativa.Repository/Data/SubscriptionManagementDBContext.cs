@@ -1,6 +1,8 @@
 ﻿using Gestão_Administrativa.Data.Map;
 using Gestão_Administrativa.Domain.Models;
+using Gestao_Administrativa.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace Gestão_Administrativa.Repository.Data
 {
@@ -8,68 +10,56 @@ namespace Gestão_Administrativa.Repository.Data
     {
         public SubscriptionManagementDBContext(DbContextOptions<SubscriptionManagementDBContext> options) : base(options) { }
 
-        public DbSet<UserModel> Users { get; set; }
+        public DbSet<CustomerModel> Customer { get; set; }
         public DbSet<SubscriptionModel> Subscriptions { get; set; }
         public DbSet<ContactModel> Contact { get; set; }
         public DbSet<AddressModel> Address { get; set; }
         public DbSet<ContractModel> Contract { get; set; }
         public DbSet<SubscriptionContractModel> SubscriptionContract { get; set; }
+        public DbSet<SubscriptionTypeModel> SubscriptionType { get; set; }
+        public DbSet<CustomerContractModel> CustomerContract { get; set; }
+        public DbSet<CustomerAddressModel> CustomerAddress { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserMap());
-            modelBuilder.ApplyConfiguration(new SubscriptionMap());
-            base.OnModelCreating(modelBuilder);
 
-            // Relacionamento Cliente -> Contato (1:1)
-            modelBuilder.Entity<UserModel>()
-                .HasOne(c => c.Contact)
+            // Configuração de relacionamento muitos-para-muitos entre Customer e Address
+            modelBuilder.Entity<CustomerAddressModel>()
+                .HasOne(ca => ca.Customer)
                 .WithMany()
-                .HasForeignKey(c => c.IdContact)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(ca => ca.CustomerId);
 
-            // Relacionamento Cliente -> Endereco (1:1)
-            modelBuilder.Entity<UserModel>()
-                .HasOne(c => c.Address)
+            modelBuilder.Entity<CustomerAddressModel>()
+                .HasOne(ca => ca.Address)
                 .WithMany()
-                .HasForeignKey(c => c.IdAddress)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(ca => ca.AddressId);
 
-            // Relacionamento Contrato -> Cliente (N:1)
-            modelBuilder.Entity<ContractModel>()
-                .HasOne(ct => ct.User)
+            // Configuração de relacionamento muitos-para-muitos entre Customer e Contract
+            modelBuilder.Entity<CustomerContractModel>()
+                .HasOne(cc => cc.Customer)
                 .WithMany()
-                .HasForeignKey(ct => ct.IdUser)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(cc => cc.CustomerId);
 
-
-            // Relacionamento Contrato -> Endereco (N:1)
-            modelBuilder.Entity<ContractModel>()
-                .HasOne(ct => ct.Address)
+            modelBuilder.Entity<CustomerContractModel>()
+                .HasOne(cc => cc.Contract)
                 .WithMany()
-                .HasForeignKey(ct => ct.IdAddress)
-                .OnDelete(DeleteBehavior.Restrict);
-            
-            // Relacionamento Contrato -> StatusCt (N:1)
-            modelBuilder.Entity<ContractModel>()
-                .HasOne(ct => ct.StatusContact)
-                .WithMany()
-                .HasForeignKey(ct => ct.StatusCtId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(cc => cc.ContractId);
 
-            // Relacionamento ContratoPlano -> Contrato (N:1)
+            // Configuração de relacionamento muitos-para-muitos entre Subscription e Contract
             modelBuilder.Entity<SubscriptionContractModel>()
-                .HasOne(cp => cp.Contract)
-                .WithMany()
-                .HasForeignKey(cp => cp.IdContract)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(sc => sc.Subscription)
+                .WithMany(s => s.SubscriptionContracts)
+                .HasForeignKey(sc => sc.SubscriptionId);
 
-
-            // Relacionamento ContratoPlano -> Plano (N:1)
             modelBuilder.Entity<SubscriptionContractModel>()
-                .HasOne(cp => cp.Subscription)
-                .WithMany(p => p.SubscriptionContracts)
-                .HasForeignKey(cp => cp.SubscriptionId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(sc => sc.Contract)
+                .WithMany()
+                .HasForeignKey(sc => sc.ContractId);
+
+            // Configuração de relacionamento um-para-muitos entre SubscriptionType e Subscription
+            modelBuilder.Entity<SubscriptionModel>()
+                .HasOne<SubscriptionTypeModel>()
+                .WithMany(st => st.Subscriptions)
+                .HasForeignKey(s => s.Id);
         }
     }
 }

@@ -6,6 +6,6 @@
         public string? ContactInfo { get; set; }
         public string? ContactType { get; set; }
 
-        public ICollection<UserModel> Users { get; set; }
+        public List<CustomerModel> Customers { get; set; }
     }
 }

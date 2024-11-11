@@ -5,33 +5,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gestão_Administrativa.Repository.Services
 {
-    public class UserRepo : IUserRepo
+     public class UserRepo : IUserRepo
     {
         private readonly SubscriptionManagementDBContext _dbContext;
         public UserRepo(SubscriptionManagementDBContext subscriptionManagementDBContext)
         {
             _dbContext = subscriptionManagementDBContext;
         }
-        public async Task<List<UserModel>> SearchAllUsers()
+        public async Task<List<CustomerModel>> SearchAllUsers()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.Customer.ToListAsync();
         }
 
-        public async Task<UserModel> SearchId(int id)
+        public async Task<CustomerModel> SearchId(int id)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Customer.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<UserModel> Add(UserModel user)
+        public async Task<CustomerModel> Add(CustomerModel user)
         {
-            await _dbContext.Users.AddAsync(user);
+            await _dbContext.Customer.AddAsync(user);
             await _dbContext.SaveChangesAsync();
 
             return user;
         }
-        public async Task<UserModel> Update(UserModel user, int id)
+        public async Task<CustomerModel> Update(CustomerModel user, int id)
         {
-            UserModel userById = await SearchId(id);
+            CustomerModel userById = await SearchId(id);
 
             if(userById == null)
             {
@@ -39,9 +39,8 @@ namespace Gestão_Administrativa.Repository.Services
             }
 
             userById.Name = user.Name;
-            userById.Email = user.Email;
 
-            await _dbContext.Users.AddAsync(userById);
+            await _dbContext.Customer.AddAsync(userById);
             await _dbContext.SaveChangesAsync();
 
             return userById;
@@ -49,14 +48,14 @@ namespace Gestão_Administrativa.Repository.Services
 
         public async Task<bool> Delete(int id)
         {
-            UserModel userById = await SearchId(id);
+            CustomerModel userById = await SearchId(id);
 
             if (userById == null)
             {
                 throw new Exception($"Usuario para o ID:{id} não foi encontrado no banco de dados");
             }
 
-            await _dbContext.Users.AddAsync(userById);
+            await _dbContext.Customer.AddAsync(userById);
             await _dbContext.SaveChangesAsync();
             return true;
         }

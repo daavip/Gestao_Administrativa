@@ -3,9 +3,7 @@
     public class ContactModel
     {
         public int Id { get; set; }
-        public string? ContactInfo { get; set; }
-        public string? ContactType { get; set; }
-
-        public List<CustomerModel> Customers { get; set; }
+        public required string ContactInfo { get; set; }
+        public required string ContactType { get; set; }
     }
 }

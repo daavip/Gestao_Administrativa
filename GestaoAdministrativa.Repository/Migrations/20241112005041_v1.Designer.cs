@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Gestão_Administrativa.Migrations
+namespace Gestao_Administrativa.Repository.Migrations
 {
     [DbContext(typeof(SubscriptionManagementDBContext))]
-    [Migration("20241111004334_AddNewTables")]
-    partial class AddNewTables
+    [Migration("20241112005041_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,8 +226,8 @@ namespace Gestão_Administrativa.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+                    b.Property<int?>("SubscriptionTypeId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Up")
                         .HasColumnType("text");

@@ -13,7 +13,5 @@ namespace Gestao_Administrativa.Domain.Models
         public int Id { get; set; }
         public string? Description { get; set; }
 
-
-        public List<SubscriptionModel> Subscriptions { get; set; }
     }
 }

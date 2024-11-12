@@ -3,8 +3,11 @@
     public class CustomerModel
     {
         public int Id { get ; set; }
-        public string? Name { get; set; }
-        public string? CpfCnpj { get; set; }
+        public required string Name { get; set; }
+        public required string CpfCnpj { get; set; }
+
+        public IList<ContactModel> Contacts { get; set; }
+        public AddressModel Address { get; set; }
 
     }
 }

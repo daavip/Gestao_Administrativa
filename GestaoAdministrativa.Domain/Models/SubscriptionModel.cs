@@ -3,14 +3,12 @@
     public class SubscriptionModel
     {
         public int Id { get; set; }
-        public string? Description { get; set; }
-        public int? SubscriptionTypeId { get; set; }
-        public decimal Price { get; set; }
-        public string? Up { get; set; }
-        public string? Down { get; set; }
+        public required string Description { get; set; }
+        public required string Type { get; set; }
+        public required decimal Price { get; set; }
+        public string Up { get; set; } = string.Empty;
+        public string Down { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
-
-        public List<SubscriptionContractModel> SubscriptionContracts { get; set; }
 
 
     }

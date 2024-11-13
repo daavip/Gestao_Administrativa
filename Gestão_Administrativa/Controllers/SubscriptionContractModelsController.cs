@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Gestão_Administrativa.Repository.Data;
-using Gestão_Administrativa.Domain.Models;
+using Gestao_Administrativa.Repository.Data;
+using Gestao_Administrativa.Domain.Models;
 
-namespace Gestão_Administrativa.Controllers
+namespace Gestao_Administrativa.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

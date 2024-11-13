@@ -1,11 +1,11 @@
-﻿using Gestão_Administrativa.Domain.Interface;
-using Gestão_Administrativa.Domain.Models;
-using Gestão_Administrativa.Repository.Data;
+﻿using Gestao_Administrativa.Domain.Interface;
+using Gestao_Administrativa.Domain.Models;
+using Gestao_Administrativa.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gestão_Administrativa.Repository.Services
+namespace Gestao_Administrativa.Service
 {
-     public class UserRepo : IUserRepo
+    public class UserRepo : IUserRepo
     {
         private readonly SubscriptionManagementDBContext _dbContext;
         public UserRepo(SubscriptionManagementDBContext subscriptionManagementDBContext)

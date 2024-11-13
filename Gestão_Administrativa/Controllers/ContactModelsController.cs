@@ -5,14 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Gestão_Administrativa.Repository.Data;
-using Gestão_Administrativa.Domain.Models;
+using Gestao_Administrativa.Domain.Models;
+using Gestao_Administrativa.Repository.Data;
+using Gestao_Administrativa.Domain.Interface.Service;
+using Shared.API.Controllers;
 
-
-
-
-namespace Gestão_Administrativa.Controllers
+namespace Gestao_Administrativa.API.Controllers
 {
+    //[Route("[controller]")]
+    //[ApiController]
+    //public class ContactController : BaseController<ContactModel, int?>
+    //{
+    //    public ContactController(IContactService service, ILogger<ContactController> loger) : base(service, loger)
+    //    {
+    //    }
+
+    //}
+
     [Route("api/[controller]")]
     [ApiController]
     public class ContactModelsController : ControllerBase

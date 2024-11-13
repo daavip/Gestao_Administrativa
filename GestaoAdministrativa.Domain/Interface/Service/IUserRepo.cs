@@ -1,6 +1,6 @@
-﻿using Gestão_Administrativa.Domain.Models;
+﻿using Gestao_Administrativa.Domain.Models;
 
-namespace Gestão_Administrativa.Domain.Interface
+namespace Gestao_Administrativa.Domain.Interface
 {
     public interface IUserRepo
     {

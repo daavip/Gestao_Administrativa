@@ -6,10 +6,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Gestao_Administrativa.Domain.Models;
-using Gestão_Administrativa.Repository.Data;
+using Gestao_Administrativa.Repository.Data;
+using Gestao_Administrativa.Domain.Interface.Service;
+using Shared.API.Controllers;
 
-namespace Gestão_Administrativa.Controllers
+namespace Gestao_Administrativa.API.Controllers
 {
+    //[Route("[controller]")]
+    //[ApiController]
+    //public class SubscriptionTypeController : BaseController<SubscriptionTypeModel, int?>
+    //{
+    //    public SubscriptionTypeController(ISubscriptionTypeService service, ILogger<SubscriptionTypeController> loger) : base(service, loger)
+    //    {
+    //    }
+
+    //}
+
     [Route("api/[controller]")]
     [ApiController]
     public class SubscriptionTypeModelsController : ControllerBase

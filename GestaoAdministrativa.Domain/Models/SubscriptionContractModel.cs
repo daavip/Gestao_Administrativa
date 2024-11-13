@@ -1,14 +1,18 @@
-﻿namespace Gestão_Administrativa.Domain.Models
+﻿using Shared.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Gestao_Administrativa.Domain.Models
 {
-    public class SubscriptionContractModel
+    public class SubscriptionContractModel : BaseModel
     {
-        public int Id { get; set; }
-        public int ContractId { get; set; }
-        public int SubscriptionId { get; set; }
+        public int IdContract { get; set; }
+        public int IdSubscription { get; set; }
 
-
-        public ContractModel Contract { get; set; }
-        public SubscriptionModel Subscription { get; set; }
-
+        public virtual ContractModel Contract { get; set; }
+        public virtual SubscriptionModel Subscription { get; set; }
     }
 }

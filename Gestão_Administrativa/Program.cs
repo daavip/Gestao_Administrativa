@@ -1,12 +1,10 @@
-
-using Gestão_Administrativa.Data;
-using Gestão_Administrativa.Repository;
-using Gestão_Administrativa.Domain.Interface;
+using Gestao_Administrativa.Domain.Interface;
+using Gestao_Administrativa.Domain.Interface.Service;
+using Gestao_Administrativa.Repository.Data;
+using Gestao_Administrativa.Service;
 using Microsoft.EntityFrameworkCore;
-using Gestão_Administrativa.Repository.Data;
-using Gestão_Administrativa.Repository.Services;
 
-namespace Gestão_Administrativa
+namespace Gestao_Administrativa
 {
     public class Program
     {
@@ -25,9 +23,14 @@ namespace Gestão_Administrativa
                 options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataBase"))
             );
 
-
             builder.Services.AddScoped<IUserRepo, UserRepo>();
-
+            builder.Services.AddScoped<IAddressService, AddressService>();
+            builder.Services.AddScoped<IContactService, ContactService>();
+            builder.Services.AddScoped<IContractService, ContractService>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
+            builder.Services.AddScoped<IStatusContractService, StatusContractService>();
+            builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+            builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 
             var app = builder.Build();
 

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Gestao_Administrativa.Domain.Models;
-using Gestão_Administrativa.Repository.Data;
+using Gestao_Administrativa.Repository.Data;
 
-namespace Gestão_Administrativa.Controllers
+namespace Gestao_Administrativa.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

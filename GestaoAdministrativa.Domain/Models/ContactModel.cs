@@ -1,11 +1,17 @@
-﻿namespace Gestão_Administrativa.Domain.Models
-{
-    public class ContactModel
-    {
-        public int Id { get; set; }
-        public string? ContactInfo { get; set; }
-        public string? ContactType { get; set; }
+﻿using Shared.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-        public List<CustomerModel> Customers { get; set; }
+namespace Gestao_Administrativa.Domain.Models
+{
+    public class ContactModel : BaseModel
+    {
+        public string ContactInfo { get; set; }
+        public string ContactType { get; set; }
+
+        public virtual IList<CustomerContactModel> Customers { get; set; }
     }
 }

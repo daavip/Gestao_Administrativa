@@ -1,4 +1,4 @@
-﻿using Gestão_Administrativa.Domain.Models;
+﻿using Shared.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Gestao_Administrativa.Domain.Models
 {
-    public class CustomerContractModel
+    public class CustomerContractModel : BaseModel
     {
-        public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public int ContractId { get; set; }
+        public int IdCustomer { get; set; }
+        public int IdContract { get; set; }
 
-        public CustomerModel Customer { get; set; }
-        public ContractModel Contract { get; set; }
+        public virtual CustomerModel Customer { get; set; }
+        public virtual ContractModel Contract { get; set; }
     }
 }

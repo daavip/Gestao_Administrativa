@@ -1,6 +1,0 @@
-@Gestão_Administrativa_HostAddress = http://localhost:5000
-
-GET {{Gestão_Administrativa_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

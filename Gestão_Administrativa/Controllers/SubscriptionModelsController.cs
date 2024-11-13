@@ -5,11 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Gestão_Administrativa.Repository.Data;
-using Gestão_Administrativa.Domain.Models;
+using Gestao_Administrativa.Domain.Models;
+using Gestao_Administrativa.Repository.Data;
+using Gestao_Administrativa.Domain.Interface.Service;
+using Shared.API.Controllers;
 
-namespace Gestão_Administrativa.Controllers
+namespace Gestao_Administrativa.API.Controllers
 {
+    //[Route("[controller]")]
+    //[ApiController]
+    //public class SubscriptionController : BaseController<SubscriptionModel, int?>
+    //{
+    //    public SubscriptionController(ISubscriptionService service, ILogger<SubscriptionController> loger) : base(service, loger)
+    //    {
+    //    }
+
+    //}
+
     [Route("api/[controller]")]
     [ApiController]
     public class SubscriptionModelsController : ControllerBase
@@ -25,14 +37,14 @@ namespace Gestão_Administrativa.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubscriptionModel>>> GetSubscriptions()
         {
-            return await _context.Subscriptions.ToListAsync();
+            return await _context.Subscription.ToListAsync();
         }
 
         // GET: api/SubscriptionModels/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SubscriptionModel>> GetSubscriptionModel(int id)
         {
-            var subscriptionModel = await _context.Subscriptions.FindAsync(id);
+            var subscriptionModel = await _context.Subscription.FindAsync(id);
 
             if (subscriptionModel == null)
             {
@@ -78,7 +90,7 @@ namespace Gestão_Administrativa.Controllers
         [HttpPost]
         public async Task<ActionResult<SubscriptionModel>> PostSubscriptionModel(SubscriptionModel subscriptionModel)
         {
-            _context.Subscriptions.Add(subscriptionModel);
+            _context.Subscription.Add(subscriptionModel);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSubscriptionModel", new { id = subscriptionModel.Id }, subscriptionModel);
@@ -88,13 +100,13 @@ namespace Gestão_Administrativa.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubscriptionModel(int id)
         {
-            var subscriptionModel = await _context.Subscriptions.FindAsync(id);
+            var subscriptionModel = await _context.Subscription.FindAsync(id);
             if (subscriptionModel == null)
             {
                 return NotFound();
             }
 
-            _context.Subscriptions.Remove(subscriptionModel);
+            _context.Subscription.Remove(subscriptionModel);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +114,7 @@ namespace Gestão_Administrativa.Controllers
 
         private bool SubscriptionModelExists(int id)
         {
-            return _context.Subscriptions.Any(e => e.Id == id);
+            return _context.Subscription.Any(e => e.Id == id);
         }
     }
 }
